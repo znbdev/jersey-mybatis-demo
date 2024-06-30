@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.mapper.ProductMapper">
+    <resultMap id="ProductResultMap" type="com.example.model.Product">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="price" column="price"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id, name, price
+    </sql>
+
+    <select id="getAllProducts" resultMap="ProductResultMap">
+        SELECT <include refid="Base_Column_List"/> FROM products
+    </select>
+
+    <insert id="insertProduct" parameterType="com.example.model.Product">
+        INSERT INTO products (name, price)
+        VALUES (#{name}, #{price})
+    </insert>
+</mapper>
